@@ -66,9 +66,9 @@ public class LastPlayerSighting : MonoBehaviour {
 	void MusicFading(){
 		AudioSource audio = GetComponent<AudioSource> ();
 		if (position != resetPosition) {
-			audio.volume = Mathf.Lerp (audio.volume, 0.8f, musicFadeSpeed * Time.deltaTime);
+			audio.volume = Mathf.Lerp (audio.volume, 0.3f, musicFadeSpeed * Time.deltaTime);
 		} else {
-			audio.volume = Mathf.Lerp (audio.volume, 0.8f, musicFadeSpeed * Time.deltaTime);
+			audio.volume = Mathf.Lerp (audio.volume, 0.3f, musicFadeSpeed * Time.deltaTime);
 			panicAudio.volume = Mathf.Lerp (panicAudio.volume, 0f, musicFadeSpeed * Time.deltaTime);
 		}
 	}

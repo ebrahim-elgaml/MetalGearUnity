@@ -11,6 +11,7 @@ public class Tags : MonoBehaviour {
 	public const string fader = "Fader";
 	public const string enemy = "Enemy";
 
+
 	// Use this for initialization
 	void Start () {
 	
