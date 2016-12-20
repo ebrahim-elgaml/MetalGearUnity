@@ -28,6 +28,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+		public bool isDead;
 
 		private AudioSource source;
 		bool isMute = false;
@@ -35,9 +36,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public AudioClip jumbSound;
 		public AudioClip crouchingSound;
 		private bool isJumping = false;
-
-
-
 
 		void Start()
 		{
@@ -56,6 +54,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
+			ScaleCapsuleForDying();			
 
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
@@ -92,8 +91,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 
+		void ScaleCapsuleForDying() {
+			if (isDead) {
+				m_Capsule.radius = 0.2f;
+				m_Capsule.direction = 0;
+			}
+		}
+
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
+			if(isDead) return;
+			
 			if (m_IsGrounded && crouch)
 			{
 				if (m_Crouching) return;
@@ -118,6 +126,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void PreventStandingInLowHeadroom()
 		{
+			if (isDead)
+				return;
 			// prevent standing up in crouch-only zones
 			if (!m_Crouching)
 			{
@@ -139,6 +149,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetBool("Dead", isDead);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -172,6 +183,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void HandleAirborneMovement()
 		{
+			if(isDead) return;
+			
 			// apply extra gravity from multiplier:
 			Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
 			m_Rigidbody.AddForce(extraGravityForce);
@@ -182,6 +195,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void HandleGroundedMovement(bool crouch, bool jump)
 		{
+			if(isDead) return;
+			
 			// check whether conditions are right to allow a jump:
 			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
 				// jump!
@@ -197,6 +212,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void ApplyExtraTurnRotation()
 		{
+			if(isDead) return;
+			
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 			transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
@@ -209,6 +226,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				audioManagement ();
 			}
 
+			if(isDead) return;
+			
 			// we implement this function to override the default root motion.
 			// this allows us to modify the positional speed before it's applied.
 			if (m_IsGrounded && Time.deltaTime > 0)
@@ -224,6 +243,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void CheckGroundStatus()
 		{
+			if(isDead) return;
+			
 			RaycastHit hitInfo;
 #if UNITY_EDITOR
 			// helper to visualise the ground check ray in the scene view
