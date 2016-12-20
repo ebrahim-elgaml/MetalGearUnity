@@ -29,13 +29,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 		public bool isDead;
+		public bool isShouting;
+		private KeyCode shoutButton = KeyCode.F;
 
 		private AudioSource source;
 		bool isMute = false;
 		public AudioClip runSound;
 		public AudioClip jumbSound;
 		public AudioClip crouchingSound;
-		private bool isJumping = false;
+		public AudioClip shoutingClip;
+
+	
 
 		void Start()
 		{
@@ -54,7 +58,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
-			ScaleCapsuleForDying();			
+			handleShout();			
 
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
@@ -91,13 +95,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 
-		void ScaleCapsuleForDying() {
-			if (isDead) {
-				m_Capsule.radius = 0.2f;
-				m_Capsule.direction = 0;
+		void handleShout() {
+			if(Input.GetKeyDown(shoutButton)){
+				isShouting = true;
 			}
 		}
-
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
 			if(isDead) return;
@@ -150,6 +152,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			m_Animator.SetBool("Dead", isDead);
+			m_Animator.SetBool ("Shouting", isShouting);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -200,13 +203,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// check whether conditions are right to allow a jump:
 			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
 				// jump!
-				isJumping = true;
 				m_Rigidbody.velocity = new Vector3 (m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
 				m_IsGrounded = false;
 				m_Animator.applyRootMotion = false;
 				m_GroundCheckDistance = 0.1f;
-			} else {
-				isJumping = false;
 			}
 		}
 
@@ -267,30 +267,36 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 		void audioManagement(){
 
-			if (!m_IsGrounded) {
-				if (source.clip != jumbSound) {
-					source.Stop ();
-					source.clip = jumbSound;
-					source.PlayOneShot (jumbSound);
-				}
+			if (isShouting) {
+				AudioSource.PlayClipAtPoint (shoutingClip, transform.position);
+				isShouting = false;
 			} else {
-				if (m_ForwardAmount > 0.1) {
-					if (m_Crouching) {
-						if (source.clip != crouchingSound) {
-							source.Stop ();
-							source.clip = crouchingSound;
-							source.Play ();
-						}
-					} else {
-						if (source.clip != runSound) {
-							source.Stop ();
-							source.clip = runSound;
-							source.Play ();
-						}
+			
+				if (!m_IsGrounded) {
+					if (source.clip != jumbSound) {
+						source.Stop ();
+						source.clip = jumbSound;
+						source.PlayOneShot (jumbSound);
 					}
 				} else {
-					source.Stop ();
-					source.clip = null;
+					if (m_ForwardAmount > 0.1) {
+						if (m_Crouching) {
+							if (source.clip != crouchingSound) {
+								source.Stop ();
+								source.clip = crouchingSound;
+								source.Play ();
+							}
+						} else {
+							if (source.clip != runSound) {
+								source.Stop ();
+								source.clip = runSound;
+								source.Play ();
+							}
+						}
+					} else {
+						source.Stop ();
+						source.clip = null;
+					}
 				}
 			}
 
