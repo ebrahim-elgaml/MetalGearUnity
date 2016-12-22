@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class PlayerHide : MonoBehaviour {
 	private ThirdPersonCharacter th;
 	private bool isHiding = false;
+	public AudioClip hideClip;
 	// Use this for initialization
 	void Start () {
 		th = GameObject.FindGameObjectWithTag (Tags.player).GetComponent<ThirdPersonCharacter>();
@@ -18,18 +19,21 @@ public class PlayerHide : MonoBehaviour {
 			if(isHiding){
 				th.isHiding = false;
 				isHiding = false;
+				AudioSource.PlayClipAtPoint (hideClip, transform.position);
 				transform.position = new Vector3(x, 20, z);
 			} else {
 				th.isHiding = true;
 				isHiding = true;
 				transform.position = new Vector3(x, 0, z);
+				AudioSource.PlayClipAtPoint (hideClip, transform.position);
+
 			}
 		}
 
 		if(isHiding){
 			transform.position = new Vector3(x, 0, z);
 		} else {
-			transform.position = new Vector3(x, 4, z);
+			transform.position = new Vector3(x, 20, z);
 		}
 	}
 }
