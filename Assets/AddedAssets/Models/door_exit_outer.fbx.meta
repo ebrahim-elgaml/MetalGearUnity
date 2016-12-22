@@ -1,19 +1,23 @@
 fileFormatVersion: 2
-guid: 9534d26862d5e49ff94e0dbdd8ce69cd
-timeCreated: 1481893723
+guid: 07c23510a3e4d4f29b41dd7eb2836388
+timeCreated: 1482262208
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: prop_keycard_card
+    100002: door_exit_outer_left_001
+    100004: door_exit_outer_right_001
     400000: //RootNode
-    400002: prop_keycard_card
-    2300000: prop_keycard_card
-    3300000: prop_keycard_card
-    4300000: prop_keycard_card
-    6400000: prop_keycard_card
-    7400000: Take 001
+    400002: door_exit_outer_left_001
+    400004: door_exit_outer_right_001
+    2300000: door_exit_outer_left_001
+    2300002: door_exit_outer_right_001
+    3300000: door_exit_outer_left_001
+    3300002: door_exit_outer_right_001
+    4300000: door_exit_outer_left_001
+    4300002: door_exit_outer_right_001
+    7400000: Close
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -22,7 +26,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -35,13 +39,47 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Close
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 200
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: door_exit_outer_left_001
+        weight: 1
+      - path: door_exit_outer_right_001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

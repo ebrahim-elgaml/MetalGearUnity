@@ -1,19 +1,18 @@
 fileFormatVersion: 2
-guid: 9534d26862d5e49ff94e0dbdd8ce69cd
-timeCreated: 1481893723
+guid: 4eda4f9b27069452c8a095540a621d89
+timeCreated: 1482261582
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: prop_keycard_card
+    100002: door_generic_slide_panel
     400000: //RootNode
-    400002: prop_keycard_card
-    2300000: prop_keycard_card
-    3300000: prop_keycard_card
-    4300000: prop_keycard_card
-    6400000: prop_keycard_card
-    7400000: Take 001
+    400002: door_generic_slide_panel
+    2300000: door_generic_slide_panel
+    3300000: door_generic_slide_panel
+    4300000: door_generic_slide_panel
+    7400000: Open
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -22,7 +21,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -35,13 +34,45 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Open
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 53
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: door_generic_slide_panel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

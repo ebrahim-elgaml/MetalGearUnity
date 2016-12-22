@@ -19,6 +19,8 @@ public class EnemySight : MonoBehaviour {
 	public float lastSpeed = 0f;
 	public float lastAngularSpeed = 0f;
 
+	public float test = 0f;
+
 	void Awake () 
 	{
 		nav = GetComponent<NavMeshAgent> ();

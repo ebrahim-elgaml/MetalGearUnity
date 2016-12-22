@@ -1,19 +1,47 @@
 fileFormatVersion: 2
-guid: 9534d26862d5e49ff94e0dbdd8ce69cd
-timeCreated: 1481893723
+guid: 152131a7c695941cba6f724ac2ff70be
+timeCreated: 1482358277
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: prop_keycard_card
-    400000: //RootNode
-    400002: prop_keycard_card
-    2300000: prop_keycard_card
-    3300000: prop_keycard_card
-    4300000: prop_keycard_card
-    6400000: prop_keycard_card
-    7400000: Take 001
+    100000: BOLT
+    100002: MAG
+    100004: Mesh_0004
+    100006: Mesh_0005
+    100008: Mesh_0006
+    100010: Mesh_0007
+    100012: //RootNode
+    100014: TRIGGER
+    400000: BOLT
+    400002: MAG
+    400004: Mesh_0004
+    400006: Mesh_0005
+    400008: Mesh_0006
+    400010: Mesh_0007
+    400012: //RootNode
+    400014: TRIGGER
+    2300000: BOLT
+    2300002: MAG
+    2300004: Mesh_0004
+    2300006: Mesh_0005
+    2300008: Mesh_0006
+    2300010: Mesh_0007
+    2300012: TRIGGER
+    3300000: BOLT
+    3300002: MAG
+    3300004: Mesh_0004
+    3300006: Mesh_0005
+    3300008: Mesh_0006
+    3300010: Mesh_0007
+    3300012: TRIGGER
+    4300000: Mesh_0004
+    4300002: Mesh_0006
+    4300004: MAG
+    4300006: Mesh_0005
+    4300008: TRIGGER
+    4300010: BOLT
+    4300012: Mesh_0007
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -22,7 +50,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -41,7 +69,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9534d26862d5e49ff94e0dbdd8ce69cd
+guid: a87d019c44580464bab4f3f655e4a7a0
 timeCreated: 1481893723
 licenseType: Free
 ModelImporter:
@@ -12,7 +12,6 @@ ModelImporter:
     2300000: prop_keycard_card
     3300000: prop_keycard_card
     4300000: prop_keycard_card
-    6400000: prop_keycard_card
     7400000: Take 001
     9500000: //RootNode
   materials:
@@ -41,7 +40,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
