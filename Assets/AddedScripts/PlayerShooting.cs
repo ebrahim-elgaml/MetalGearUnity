@@ -42,7 +42,7 @@ public class PlayerShooting : MonoBehaviour {
 	void Update () {
 		anim.SetBool ("HasWeapon", hasWeapon);
 		anim.SetBool ("IsShooting", shooting);
-		float shot = anim.GetFloat ("Shot");
+//		float shot = anim.GetFloat ("Shot");
 		if (Input.GetMouseButtonDown (0))
 			Shoot ();
 		else {

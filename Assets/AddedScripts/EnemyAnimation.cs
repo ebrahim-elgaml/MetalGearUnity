@@ -32,7 +32,10 @@ public class EnemyAnimation : MonoBehaviour {
 	void OnAnimatorMove()
 	{
 		// Set the NavMeshAgent's velocity to the change in position since the last frame, by the time it took for the last frame.
-		nav.velocity = anim.deltaPosition / Time.deltaTime;
+		if(Time.deltaTime > 0f)
+			nav.velocity = anim.deltaPosition / Time.deltaTime;
+		else
+			nav.velocity = new Vector3(0f, 0f, 0f);
 
 		// The gameobject's rotation is driven by the animation's rotation.
 		transform.rotation = anim.rootRotation;

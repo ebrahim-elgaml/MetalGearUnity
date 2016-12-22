@@ -19,9 +19,13 @@ public class BigBossHealth : MonoBehaviour {
 	public bool isDead = false;
 
 	GameObject healthProgress;
+	private MenuHandeler menu;
+
 
 
 	void Awake() {
+		menu = GameObject.FindGameObjectWithTag (Tags.menu).GetComponent<MenuHandeler> ();
+
 		anim = GetComponent<Animator> ();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag (Tags.fader).GetComponent<SceneFadeInOut> ();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<LastPlayerSighting> ();
@@ -33,6 +37,16 @@ public class BigBossHealth : MonoBehaviour {
 //		GetComponent<CapsuleCollider>().direction = 0;
 		anim.SetBool("Dead", isDead);
 		AudioSource.PlayClipAtPoint (deathCLip, transform.position);
+	}
+
+	void LevelReset() {
+
+		timer += Time.deltaTime;
+
+		if (timer >= resetAfterDeathTime) {
+			//			sceneFadeInOut.EndScene ();
+			menu.Pause ();
+		}
 	}
 
 	void PlayerDead() {
@@ -52,6 +66,7 @@ public class BigBossHealth : MonoBehaviour {
 				playerDying ();
 			} else {
 				PlayerDead ();
+				LevelReset ();
 			}
 
 

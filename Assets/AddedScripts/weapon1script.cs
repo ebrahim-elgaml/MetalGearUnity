@@ -12,16 +12,13 @@ public class weapon1script : MonoBehaviour {
 	}
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameObject.FindGameObjectWithTag (Tags.player);
 		playerInventory =  player.GetComponent<PlayerInventory> ();
 
 	}
 	void OnTriggerEnter(Collider other) {
-		print ("ENter");
-		print (other.gameObject);
-		print (player);
+
 		if (other.gameObject == player) {
-			print ("ENter if ");
 			AudioSource.PlayClipAtPoint (keyGrab, transform.position);
 			playerInventory.hasWeapon1 = true;
 			Destroy (gameObject);

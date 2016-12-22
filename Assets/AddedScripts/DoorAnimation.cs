@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DoorAnimation : MonoBehaviour {
 
@@ -12,6 +14,7 @@ public class DoorAnimation : MonoBehaviour {
 	private PlayerInventory playerInventory;
 	private AudioSource audio;
 	private int count;
+	public Text keyStatus;
 
 	public bool isYellow;
 	public bool isBlue;
@@ -27,10 +30,18 @@ public class DoorAnimation : MonoBehaviour {
 			if (requireKey) {
 				bool f = false;
 				if (isYellow)
-					f = playerInventory.hasYellowKey && playerInventory.openBlue;
+					f = playerInventory.hasYellowKey && playerInventory.openBlue && playerInventory.yellowSelected;
 				if (isBlue)
-					f = playerInventory.hasBlueKey;
+					f = playerInventory.hasBlueKey && playerInventory.blueSelected;
 				if (f) {
+					if( isYellow) SceneManager.LoadScene ("LastLevel", LoadSceneMode.Single);
+					if (isBlue) {
+						keyStatus.text = "No key selected"; 
+						playerInventory.hasBlueKey = false;
+						playerInventory.blueSelected = false;
+						playerInventory.openBlue = true;
+					}
+						
 					count++;
 				} else {
 					audio.clip = accessDeniedClip;
@@ -49,6 +60,8 @@ public class DoorAnimation : MonoBehaviour {
 		}
 
 	}
+
+
 	void onTriggerExit(Collider other) {
 		if (other.gameObject == player || (other.gameObject.tag == Tags.enemy || other is CapsuleCollider)) {
 			count = Mathf.Max (0, count - 1);
