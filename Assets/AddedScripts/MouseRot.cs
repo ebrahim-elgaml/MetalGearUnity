@@ -16,7 +16,7 @@ public class MouseRot : MonoBehaviour {
 		float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
 		float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
 //		target.transform.Rotate(0, horizontal, 0);
-		target.transform.Rotate(vertical, horizontal, 0);
+		target.transform.Rotate(0, horizontal, 0);
 
 
 	}

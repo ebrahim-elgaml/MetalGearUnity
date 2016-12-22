@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public bool isDead;
 		public bool isShouting;
 		private KeyCode shoutButton = KeyCode.F;
-
+		public bool isHiding;
 		private AudioSource source;
 		bool isMute = false;
 		public AudioClip runSound;
@@ -102,7 +102,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 		void ScaleCapsuleForCrouching(bool crouch)
 		{
-			if(isDead) return;
+			if(isDead || isHiding) return;
 			
 			if (m_IsGrounded && crouch)
 			{
@@ -128,7 +128,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void PreventStandingInLowHeadroom()
 		{
-			if (isDead)
+			if (isDead || isHiding)
 				return;
 			// prevent standing up in crouch-only zones
 			if (!m_Crouching)
@@ -186,7 +186,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void HandleAirborneMovement()
 		{
-			if(isDead) return;
+			if(isDead || isHiding) return;
 			
 			// apply extra gravity from multiplier:
 			Vector3 extraGravityForce = (Physics.gravity * m_GravityMultiplier) - Physics.gravity;
@@ -198,7 +198,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void HandleGroundedMovement(bool crouch, bool jump)
 		{
-			if(isDead) return;
+			if(isDead || isHiding) return;
 			
 			// check whether conditions are right to allow a jump:
 			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
@@ -212,7 +212,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void ApplyExtraTurnRotation()
 		{
-			if(isDead) return;
+			if(isDead || isHiding) return;
 			
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
@@ -226,9 +226,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				audioManagement ();
 			}
 
-			if(isDead) return;
+			if(isDead || isHiding ) return;
 			
-			// we implement this function to override the default root motion.
+			// we implem||ent this function to override the default root motion.
 			// this allows us to modify the positional speed before it's applied.
 			if (m_IsGrounded && Time.deltaTime > 0)
 			{
@@ -243,7 +243,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void CheckGroundStatus()
 		{
-			if(isDead) return;
+			if(isDead || isHiding) return;
 			
 			RaycastHit hitInfo;
 #if UNITY_EDITOR

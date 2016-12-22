@@ -17,8 +17,10 @@ public class EnemyShoting : MonoBehaviour {
 	private PlayerHealth playerHealth;
 	private bool shooting;
 	private float scaledDamage;
+	private BigBossHealth bigBossHealth;
 
 	void Awake(){
+		bigBossHealth = GetComponent<BigBossHealth> ();
 		anim = GetComponent<Animator> ();
 		laserShotLine = GetComponentInChildren<LineRenderer> ();
 		laserShotLight = laserShotLine.gameObject.GetComponent<Light>();
@@ -39,7 +41,8 @@ public class EnemyShoting : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float shot = anim.GetFloat ("Shot");
-
+		if (bigBossHealth.health <= 0f)
+			return;
 		if (shot > 0.5f && !shooting) {
 			Shoot ();
 		}

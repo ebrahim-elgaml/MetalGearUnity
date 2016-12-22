@@ -8,7 +8,7 @@ public class BigBossHealthBar : MonoBehaviour {
 	private float health = 200;
 	// Use this for initialization
 	void Start () {
-		bigBossHealth = GetComponent<BigBossHealth> ();
+		bigBossHealth = GetComponentInParent<BigBossHealth> ();
 		health = bigBossHealth.health;
 		org = transform.localScale.x;
 	}

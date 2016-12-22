@@ -10,6 +10,7 @@ public class Healthprogress : MonoBehaviour {
 	void Start () {
 		playerHealth = GameObject.FindGameObjectWithTag (Tags.player).gameObject.GetComponent<PlayerHealth> ();
 		org = transform.localScale.x;
+		health = playerHealth.health;
 	}
 	
 	// Update is called once per frame

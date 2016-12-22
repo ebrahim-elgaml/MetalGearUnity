@@ -29,16 +29,14 @@ public class BigBossHealth : MonoBehaviour {
 
 	void playerDying() {
 		isDead = true;
-		GetComponent<CapsuleCollider>().radius = 0.2f;
-		GetComponent<CapsuleCollider>().direction = 0;
+//		GetComponent<CapsuleCollider>().radius = 0.2f;
+//		GetComponent<CapsuleCollider>().direction = 0;
 		anim.SetBool("Dead", isDead);
 		AudioSource.PlayClipAtPoint (deathCLip, transform.position);
 	}
 
 	void PlayerDead() {
 		lastPlayerSighting.position = lastPlayerSighting.resetPosition;
-		GetComponent<AudioSource> ().Stop ();
-
 	}
 
 	// Use this for initialization
@@ -48,14 +46,17 @@ public class BigBossHealth : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		anim.SetBool("Dead", isDead);
 		if (health <= 0f) {
 			if (!isDead) {
 				playerDying ();
 			} else {
 				PlayerDead ();
 			}
+
+
 		}
+		if (isDead) transform.position = new Vector3 (transform.position.x, -1, transform.position.z);
 	}
 
 	public void TakeDamage(float amount) {

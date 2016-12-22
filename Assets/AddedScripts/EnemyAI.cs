@@ -34,8 +34,7 @@ public class EnemyAI : MonoBehaviour
 	{
 		if( enemySight.playerInSight && playerHealth.health > 0f )
 		{
-			print ("IN SIGHT ");
-			Shooting();
+//			Shooting();
 		}
 		else if( enemySight.personalLastSighting != lastPlayerSighting.resetPosition && playerHealth.health > 0f )
 		{
@@ -55,6 +54,8 @@ public class EnemyAI : MonoBehaviour
 
 	void Chasing() 
 	{
+		if (GetComponent<BigBossHealth> ().health <= 0f)
+			return;
 		Vector3 sightingDeltaPos = enemySight.personalLastSighting - transform.position;
 		if( sightingDeltaPos.sqrMagnitude > 4f )
 		{
@@ -80,6 +81,8 @@ public class EnemyAI : MonoBehaviour
 
 	void Patrolling() 
 	{
+		if (GetComponent<BigBossHealth> ().health <= 0f)
+			return;
 		nav.speed = patrolSpeed;
 
 		if( nav.destination == lastPlayerSighting.resetPosition || nav.remainingDistance < nav.stoppingDistance )

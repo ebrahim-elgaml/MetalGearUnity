@@ -5,7 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerHealth : MonoBehaviour {
 
-	public float health = 10000f;
+	public float health = 100f;
 	public float maxHealth;
 
 	public float resetAfterDeathTime = 10f;
