@@ -5,7 +5,8 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class PlayerHealth : MonoBehaviour {
 
-	public float health = 100f;
+	public float health = 10000f;
+	public float maxHealth;
 
 	public float resetAfterDeathTime = 10f;
 	public AudioClip deathCLip;
@@ -18,14 +19,14 @@ public class PlayerHealth : MonoBehaviour {
 	private float timer;
 	private bool playerDead = false;
 
+	GameObject healthProgress;
+
+
 	void Awake() {
 		anim = GetComponent<Animator> ();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag (Tags.fader).GetComponent<SceneFadeInOut> ();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<LastPlayerSighting> ();
 		th = GameObject.FindGameObjectWithTag (Tags.player).GetComponent<ThirdPersonCharacter> ();
-
-
-
 	}
 
 	void playerDying() {
@@ -58,6 +59,7 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		if (health <= 0f) {
 			if (!playerDead) {
 				playerDying ();
