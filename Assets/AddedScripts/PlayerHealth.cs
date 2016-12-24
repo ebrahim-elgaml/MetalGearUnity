@@ -19,10 +19,14 @@ public class PlayerHealth : MonoBehaviour {
 	private float timer;
 	private bool playerDead = false;
 
+	private MenuHandeler menu;
+
 	GameObject healthProgress;
 
 
 	void Awake() {
+		
+		menu = GameObject.FindGameObjectWithTag (Tags.menu).GetComponent<MenuHandeler> ();
 		anim = GetComponent<Animator> ();
 		sceneFadeInOut = GameObject.FindGameObjectWithTag (Tags.fader).GetComponent<SceneFadeInOut> ();
 		lastPlayerSighting = GameObject.FindGameObjectWithTag (Tags.gameController).GetComponent<LastPlayerSighting> ();
@@ -45,10 +49,12 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	void LevelReset() {
+		
 		timer += Time.deltaTime;
 
 		if (timer >= resetAfterDeathTime) {
-			sceneFadeInOut.EndScene ();
+//			sceneFadeInOut.EndScene ();
+			menu.Pause ();
 		}
 	}
 

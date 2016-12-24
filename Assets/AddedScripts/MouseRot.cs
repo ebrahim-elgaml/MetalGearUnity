@@ -8,7 +8,7 @@ public class MouseRot : MonoBehaviour {
 	Vector3 offset;
 	// Use this for initialization
 	void Start () {
-		Cursor.visible = false;
+//		Cursor.visible = false;
 		offset = target.transform.position - transform.position;
 	}
 	
